@@ -6,7 +6,4 @@ public interface ImageDemoConfiguration extends IndexConfiguration{
 
 	public abstract File getDatasetUrlsFile(String dataset);
 	
-	public abstract String getImageControllerClass();
-	
-
 }

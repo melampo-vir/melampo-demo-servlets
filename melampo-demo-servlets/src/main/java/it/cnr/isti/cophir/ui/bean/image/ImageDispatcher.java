@@ -2,13 +2,14 @@ package it.cnr.isti.cophir.ui.bean.image;
 
 import it.cnr.isti.config.index.ImageDemoConfiguration;
 import it.cnr.isti.exception.TechnicalRuntimeException;
+import it.cnr.isti.melampo.tools.thumbnail.locator.ImageLocator;
 
 import java.util.Set;
 
 public class ImageDispatcher {
 
 	RandomImages randomImages;
-	ImageController imageController;
+	ImageLocator imageLocator;
 	ImageDemoConfiguration configuration;
 
 	public ImageDemoConfiguration getConfiguration() {
@@ -29,13 +30,13 @@ public class ImageDispatcher {
 			this.randomImages = randomImages;
 	}
 
-	public ImageController getImageController() {
-		if (imageController == null) {
+	public ImageLocator getImageController() {
+		if (imageLocator == null) {
 			String imageControllerClass = getConfiguration()
-					.getImageControllerClass();
+					.getImageLocatorClass();
 			if (imageControllerClass != null) {
 				try {
-					imageController = (ImageController) Class.forName(
+					imageLocator = (ImageLocator) Class.forName(
 							imageControllerClass).newInstance();
 				} catch (Exception e) {
 					throw new TechnicalRuntimeException(
@@ -45,7 +46,7 @@ public class ImageDispatcher {
 			}
 		}
 
-		return imageController;
+		return imageLocator;
 	}
 
 	// public void setImageController(ImageController imageController) {
